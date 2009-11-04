@@ -1,0 +1,26 @@
+Fine Grain Profiler
+-------------------
+
+A simplistic profiler which uses sys.settrace to collect time spent executing each line.
+
+Project is at a very early stage and has many issues.
+
+fpg is not thread safe.
+
+example:
+
+import fgp
+
+def test():
+    fgp.begin() # start profiling after this line
+    [i for i in range(10000)]
+    fgp.end() # end profiling
+
+test()
+fgp.print_stats()
+
+
+Shoul print:
+Time(ms)        Hits            Line
+--------------- --------------- ----------------------------------------
+      30.000000           10001 test.py:test@5>[i for i in range(10000)]
